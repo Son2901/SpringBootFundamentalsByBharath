@@ -2,6 +2,8 @@ package com.bharath.springweb.controllers;
 
 import com.bharath.springweb.entities.Product;
 import com.bharath.springweb.repositories.ProductRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,8 @@ import java.util.List;
 
 @RestController
 public class ProductRestController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductRestController.class);
 
     @Autowired
     ProductRepo repo;
@@ -20,6 +24,7 @@ public class ProductRestController {
 
     @GetMapping("/products/{id}")
     public Product getProduct(@PathVariable("id") int id){
+        LOGGER.info("finding Product By ID "+id);
         return repo.findById(id).get();
     }
 
